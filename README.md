@@ -55,7 +55,7 @@ EXAMPLE - NEED TO UPDATE WITH CURRENT PROJECT IF NEEDED
 
 ## Citation
 
-**If you use the work contained in the repository for your research or job then a citation would be very welcome when you write up.**
+**Please cite the repository if you use its contents in your research or job.**
 
 Please cite the code and work in this repository as follows:
 
