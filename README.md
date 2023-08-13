@@ -41,7 +41,7 @@ Copyright (c) 2023 Zsofia Baruwa
 
 **Table of Contents**
 - [Overview](#overview)
-- [Author ORCIDs](#author_orcids)
+- [Author ORCIDs](#author)
 - [Dependencies](#dependencies)
 - [Citation](#citation)
   - [Bibtex Citation](#bibtex_citation)
