@@ -31,7 +31,7 @@ The WikiData requires a lot of cleaning, handling duplicates etc. and comments a
 And the function that visualising the network from "final_df" dataframe (visualise_b2b_network()). 
 
 The materials and methods in this repository support researchers and industry professionals to explore the sometimes over complicated corporate group structures in 
-a user friendly interface as percieved by the public. 
+a user friendly interface as perceived by the public. 
 
 MIT Licence
 
