@@ -7,11 +7,11 @@
 
 ## Overview
 
-The library can be installed as,
+The package can be installed as,
 
 > `pip install B2BNetworkWiki`
 
-Currently the package has 3 main functions:            
+Currently it has 3 main functions:            
 
 1.   choose_company(input_name, search_option='all')
 2.   get_companies_network(QIDs, num_runs=(5,5,5,5))
