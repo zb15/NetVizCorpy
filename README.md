@@ -41,12 +41,12 @@ Copyright (c) 2023 Zsofia Baruwa
 
 **Table of Contents**
 - [Overview](#overview)
-- [Author ORCIDs](#authororcids)
-- [Dependencies](#dependecies)
+- [Author ORCIDs](#author_orcids)
+- [Dependencies](#dependencies)
 - [Citation](#citation)
-  - [Bibtex Citation](#bibtexcitation)
+  - [Bibtex Citation](#bibtex_citation)
 - [Usage](#usage)
-  - [Repo Structure](#repostructure)
+  - [Repo Structure](#repo_structure)
   - [Download](#download)
   - [Functions](#functions)
 - [Example](#example)
