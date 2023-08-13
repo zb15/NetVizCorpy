@@ -111,16 +111,16 @@ Please cite the code and work in this repository as follows:
 ## Usage
 [[back to top](#b2bnetworkwiki)]
 
-B2BNetworkWiki allows User to search and choose companies and explore their corporate stucture network in a user friendly format, as percieved by the public. Since, the data is queried from WikiData with each run, slight differences could occure once a new or updated item is searched again.
+B2BNetworkWiki allows User to search and choose companies and explore their corporate structure network in a user friendly format, as perceived by the public. Since, the data is queried from WikiData with each run, slight differences could occur once a new or updated item is searched again.
 
 The package has 3 main functions and it has the following characteristics.
 
 ### Function 1. **choose_company(input_name, search_options='all')**
 
-This function takes two arguments and returns the QID and company name for every results based on the the search option. 
+This function takes two arguments and returns the QID and company name for every results based on the search option. 
 
 The *first* argument is to add the company's name (case sensitive).
-The *second* one have 4 different arguments to choose from, but not necesseraly needed. If left out, then by default it is set to return 'all' serach options.
+The *second* one have 4 different arguments to choose from, but not necessarily needed. If left out, then by default it is set to return 'all' search options.
 In case User knows the exact company name as appears on WikiData (e.g., "Tesla, Inc."), the 'exact' search option is recommended. 
 
 Other search options available are  
@@ -136,17 +136,17 @@ This function takes two arguments and returns 4 dataframes in a dictionary (even
 
 The *first* argument needs to be a list of unique IDs starting with Q, that could be matched and used for query WikiData.
 The *second* one have 4 values in the argument to specify
-what level of each relations the user is interested. By default it is set to (5,5,5,5), and in that case could just add the first args. The levels could be specified as >0 integers. Beyond 5 levels in case big corporations it could take several minutes to return the results. The first postion is to get parent companies, the second position is still upward relation, is to get owned by relations. For example if User only interested in upwards relations for 3 levels of the chosen companies, then it could be specified as (3,3,0,0). The last two position is for to get subsidiaries and owner of relations.
+what level of each relations the user is interested. By default it is set to (5,5,5,5), and in that case could just add the first args. The levels could be specified as >0 integers. Beyond 5 levels in case big corporations it could take several minutes to return the results. The first position is to get parent companies, the second position is still upward relation, is to get owned by relations. For example if User only interested in upwards relations for 3 levels of the chosen companies, then it could be specified as (3,3,0,0). The last two position is for to get subsidiaries and owner of relations.
 
 ### Function 3. **visualise_b2b_network(final_df)**
 
-The **visualise_b2b_network()** function has 2 steps at the moment. The 1st step (with *clean_and_join(p_df, ob_df, s_df, oo_df)* function) is to clean the 4 datasets and join them together into one dataframe. It can take up to several minutes depending on the dataset sizes, and that is one of the reason these steps are seperated (it could also be used for other tasks not just visualising the network). The WikiData requires lots of cleaning, handling duplicates etc. and comments are included within the code file. It covers the following main cleaning processes (with assumptions):
+The **visualise_b2b_network()** function has 2 steps at the moment. The 1st step (with *clean_and_join(p_df, ob_df, s_df, oo_df)* function) is to clean the 4 datasets and join them together into one dataframe. It can take up to several minutes depending on the dataset sizes, and that is one of the reason these steps are separated (it could also be used for other tasks not just visualising the network). The WikiData requires lots of cleaning, handling duplicates etc. and comments are included within the code file. It covers the following main cleaning processes (with assumptions):
 
 *   drop duplicates from each datasets (beyond exact same records): 
 
       *   if proportion has values for both 'authorised capital' and 'voting interest' then only 'authorised capital' is kept;
       *   the record with the most recent date is kept, the older one(s) dropped;
-      *   match the industries (it could result in duplicates the same pair with exactly same values for each column except the randomness that could happen when there are more then one industry is listed for either or both of the companies);
+      *   match the industries (it could result in duplicates the same pair with exactly same values for each column except the randomness that could happen when there are more than one industry is listed for either or both of the companies);
 
 *   mark those records that has an end date with a value of "4" in the proportion column in order to differentiate them on the graph
 
@@ -156,7 +156,7 @@ The **visualise_b2b_network()** function has 2 steps at the moment. The 1st step
 
 *   in case a company has more than one industry, then based on the most frequent industries in the ecosystem of the queried companies, the most frequent ones will be used for visualisation purposes (but all industries will be listed next to the company name once User hover over the node) 
 
-*   any record that has no industries, then it will be checked if it is a human and or something else (e.g., a brand) and the brief discription will be visible instead of the industries on the graph
+*   any record that has no industries, then it will be checked if it is a human and or something else (e.g., a brand) and the brief description will be visible instead of the industries on the graph
 
 *   countries will be visible next to the company names on the graph once User hover over the nodes, while the continent it belongs will be seen as various shapes of the nodes
 
@@ -167,7 +167,7 @@ The **visualise_b2b_network()** function has 2 steps at the moment. The 1st step
 
 *   The code will return a .html file that can be downloaded from colab and open in any browser. It is a dynamic graph, that could be dragged as User wishes to explore more the details.
 
-*   Once the graph .html file opened, on top of the screen there are some built in filter functions. Each company could searched by name (Select node..).  The Select a network item has the option of nodes or edges. For example, certain industries could be highlighted from nodes -> groups -> then any industries from the graph can be choosen from a list (or typed in).
+*   Once the graph .html file opened, on top of the screen there are some built in filter functions. Each company could searched by name (Select node..).  The Select a network item has the option of nodes or edges. For example, certain industries could be highlighted from nodes -> groups -> then any industries from the graph can be chosen from a list (or typed in).
 
 *   Visual guides:
 
@@ -180,7 +180,7 @@ The **visualise_b2b_network()** function has 2 steps at the moment. The 1st step
         4.   Africa - diamond
         5.   Asia - square
         6.   Australia - ellipse
-        7.   Antartica (and anything else, such as unknown values) - dot
+        7.   Antarctica (and anything else, such as unknown values) - dot
 
    *   The network is directed, **edges** pointing from parent organisation toward child companies. The edges are colour coded and could take up to 5 colours and comments while hovering over:
         
