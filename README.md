@@ -7,7 +7,7 @@
 
 ## Overview
 
-The package can be installed as,
+The package is hosted at [https://github.com/zb15/B2BNetworkWiki](https://github.com/zb15/B2BNetworkWiki) and can be installed as,
 
 > `pip install B2BNetworkWiki`
 
@@ -33,11 +33,34 @@ And the function that visualising the network from "final_df" dataframe (visuali
 The materials and methods in this repository support researchers and industry professionals to explore the sometimes over complicated corporate group structures in 
 a user friendly interface as percieved by the public. 
 
+MIT Licence
+
+Copyright (c) 2023 Zsofia Baruwa
+
+<hr>
+
+**Table of Contents**
+- [Overview](#overview)
+- [Author ORCIDs](#authororcids)
+- [Dependencies](#dependecies)
+- [Citation](#citation)
+  - [Bibtex Citation](#bibtexcitation)
+- [Usage](#usage)
+  - [Repo Structure](#repostructure)
+	- [Download](#download)
+	- [Functions](#functions)
+- [Example](#example)
+- [Reference](#reference)
+- [Acknowledgements](#acknowledgements)
+
+<hr>
+
 ## Author ORCIDs
 
 [![ORCID: Baruwa](https://img.shields.io/badge/ORCID-0000--0003--2933--0890-brightgreen)](https://orcid.org/0000-0003-2933-0890)
 
 ## Dependencies
+[[back to top](#b2bnetworkwiki)]
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 
@@ -58,6 +81,7 @@ EXAMPLE - NEED TO UPDATE WITH CURRENT PROJECT IF NEEDED
 * Run out Jupyter notebooks in binder [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/.../HEAD)
 
 ## Citation
+[[back to top](#b2bnetworkwiki)]
 
 **A citation to the repository would be appreciated if you use any of its contents in your research or job.**
 
@@ -84,7 +108,13 @@ Please cite the code and work in this repository as follows:
 }
 ```
 
-## Repo Overview
+## Usage
+[[back to top](#b2bnetworkwiki)]
+
+abc...
+
+### Repo Structure
+[[back to top](#b2bnetworkwiki)]
 
 ```
 .
@@ -115,3 +145,30 @@ Please cite the code and work in this repository as follows:
 * `main.py` - an example to use B2BNetworkWiki
 * `README` - what you are reading now!
 * `_toc.yml` - the table of contents for our Jupyter Book.
+
+### Download
+[[back to top](#b2bnetworkwiki)]
+
+abc...
+
+
+### Functions
+[[back to top](#b2bnetworkwiki)]
+
+abc...
+
+## Example
+[[back to top](#b2bnetworkwiki)]
+
+...
+
+...
+
+
+## Reference
+[[back to top](#b2bnetworkwiki)]
+...
+
+## Acknowledments
+
+...
