@@ -13,11 +13,11 @@ The package is hosted at [https://github.com/zb15/B2BNetworkWiki](https://github
 
 Currently it has 3 main functions:            
 
-1.   choose_company(input_name, search_option='all')
-2.   get_companies_network(QIDs, num_runs=(5,5,5,5))
-3.   visualise_b2b_network(df)
+1.   choose_company()
+2.   get_companies_network()
+3.   visualise_b2b_network()
 
-The **choose_company()** allows user to search companies with various search options: exact match; starts with the input plus space; 
+The **choose_company(input_name, search_option='all')** allows user to search companies with various search options: exact match; starts with the input plus space; 
 starts with the input plus comma plus space, or as default all options.
 User can search and choose any number of companies, and will need to save the QIDs only to a list to use them in the next function.
 
@@ -25,7 +25,7 @@ The **get_companies_network(QIDs, num_runs=(5,5,5,5))** has 4 set of sub-functio
 to query the different relations (parent, owned by, subsidiary and owner of) plus some cleaning functions. It returns the max 4 dataframes
 (p_df, ob_df, s_df, oo_df) (empty if it is requested to be 0).  
 
-The **visualise_b2b_network()** function has 2 steps at the moment (that can easily be made into 1 function). 
+The **visualise_b2b_network(final_df)** function has 2 steps at the moment (that can easily be made into 1 function). 
 The 1st step (with clean_and_join(p_df, ob_df, s_df, oo_df) function) is to clean the 4 datasets and join them together into a "final_df". 
 The WikiData requires a lot of cleaning, handling duplicates etc. and comments are included within (the quite long) code. 
 And the function that visualising the network from "final_df" dataframe (visualise_b2b_network()). 
