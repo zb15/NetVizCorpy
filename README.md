@@ -185,10 +185,10 @@ The **visualise_b2b_network()** function has 2 steps at the moment. The 1st step
    *   The network is directed, **edges** pointing from parent organisation toward child companies. The edges are colour coded and could take up to 5 colours and comments while hovering over:
         
        1.   parent company (colour: salmon)
-       2.   proportion of shares that are greater than 0, but smaller than 0.5 (coulour: turquoise)
+       2.   proportion of shares that are greater than 0, but smaller than 0.5 (colour: turquoise)
        3.   proportion of shares that are >=0.5 but <=1 (colour: violet)
        4.   where no data available on WikiData commented as "unknown" (colour: lime)
-       5.   those relation that ended are commented with their end date (colour: grey)
+       5.   those relations that ended are commented with their end date (colour: grey)
 
    *   There is also an option for user to adjust the physics of the network graph. It's panel is located below the graph.
 
