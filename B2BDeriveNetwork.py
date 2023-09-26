@@ -54,7 +54,7 @@ def get_company_parent_info(wikidata_id):
 
 
 def has_ownedby(wikidata_id):
-    querier = Querier(wikidata_id, 5)
+    querier = Querier(wikidata_id, 3)
     response = querier.connect()
     if response.status_code != 204 and response.headers["content-type"].strip().find("json") > -1:
         try:
@@ -81,7 +81,7 @@ def has_ownedby(wikidata_id):
 
 # Defining a function that takes a Wikidata ID and returns a dictionary of information about its industry, parent organizations and subsidiaries
 def get_company_ownedby_info(wikidata_id):
-    querier = Querier(wikidata_id, 6)
+    querier = Querier(wikidata_id, 4)
     response = querier.connect()
     if response.status_code != 204 and response.headers["content-type"].strip().find("json") > -1:
         try:
@@ -104,7 +104,7 @@ def get_company_ownedby_info(wikidata_id):
 
 # Checking if entity has a subsidiary (which is also a type of company), and if so how many
 def has_subsidiary(wikidata_id):
-    querier = Querier(wikidata_id, 7)
+    querier = Querier(wikidata_id, 5)
     response = querier.connect()
     if response.status_code != 204 and response.headers["content-type"].strip().find("json") > -1:
         try:
@@ -131,7 +131,7 @@ def has_subsidiary(wikidata_id):
 
 # getting company's subsidaries
 def get_company_subsidiary_info(wikidata_id):
-    querier = Querier(wikidata_id, 8)
+    querier = Querier(wikidata_id, 6)
     response = querier.connect()
     if response.status_code != 204 and response.headers["content-type"].strip().find("json") > -1:
         try:
@@ -155,7 +155,7 @@ def get_company_subsidiary_info(wikidata_id):
 
 # Checking if entity has a ownerof (which is also a type of company), and if so how many
 def has_ownerof(wikidata_id):
-    querier = Querier(wikidata_id, 3)
+    querier = Querier(wikidata_id, 7)
     response = querier.connect()
     if response.status_code != 204 and response.headers["content-type"].strip().find("json") > -1:
         try:
@@ -180,7 +180,7 @@ def has_ownerof(wikidata_id):
 
 # Defining a function that takes a Wikidata ID and returns a dictionary of information about its industry, parent organizations and subsidiaries
 def get_company_ownerof_info(wikidata_id):
-    querier = Querier(wikidata_id, 4)
+    querier = Querier(wikidata_id, 8)
     response = querier.connect()
     if response.status_code != 204 and response.headers["content-type"].strip().find("json") > -1:
         try:
