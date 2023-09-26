@@ -35,7 +35,7 @@ def is_human(wikidata_id):
 def get_description(wikidata_id):
     # Initializing an empty dictionary to store the information
     info = {}
-    querier = Querier(wikidata_id, 9)
+    querier = Querier(wikidata_id, 0)
     response = querier.connect()
     if response.status_code != 204 and response.headers["content-type"].strip().find("json") > -1:
         try:
