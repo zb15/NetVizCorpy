@@ -200,26 +200,14 @@ def top_industries(final_df):
     final_df["top_p_industries"] = final_df["p_industries"].apply(pick_expression)
     final_df["top_c_industries"] = final_df["c_industries"].apply(pick_expression)
 
-    # replace the empty strings with NaN
-    final_df["top_p_industries"] = final_df["top_p_industries"].replace("", np.nan)
-    final_df["top_c_industries"] = final_df["top_c_industries"].replace("", np.nan)
-    final_df["p_industries"] = final_df["p_industries"].replace("", np.nan)
-    final_df["c_industries"] = final_df["c_industries"].replace("", np.nan)
-
-    # use isna method to get a boolean mask of missing values
-    mask = final_df["top_p_industries"].isna()
-    mask2 = final_df["top_c_industries"].isna()
-    mask3 = final_df["p_industries"].isna()
-    mask4 = final_df["c_industries"].isna()
-
-    # use loc method to assign "unknown" to the rows where col2 is missing
-    final_df.loc[mask, "top_p_industries"] = "unknown"
-    final_df.loc[mask2, "top_c_industries"] = "unknown"
-    final_df.loc[mask3, "p_industries"] = "unknown"
-    final_df.loc[mask4, "c_industries"] = "unknown"
-
-    final_df["top_p_industries"] = final_df["top_p_industries"].str.lstrip()
-    final_df["top_c_industries"] = final_df["top_c_industries"].str.lstrip()
+    # list of columns to be processed
+    cols = ["top_p_industries", "top_c_industries", "p_industries", "c_industries"]
+    # replace the empty strings with 'unknown' and strip leading spaces
+    for col in cols:
+      final_df[col] = final_df[col].replace("", np.nan)
+      mask = final_df[col].isna()
+      final_df.loc[mask, col] = "unknown"
+      final_df[col] = final_df[col].str.lstrip()
 
     # make a list of all those parent QIDs where the industry is "unknown"
     unique_values1 = final_df.loc[(final_df['top_p_industries'] == 'unknown'), 'pQID'].drop_duplicates().values.tolist()
@@ -306,65 +294,28 @@ def top_industries(final_df):
             final_df.loc[index, 'c_industries'] = descr_value2
             final_df.loc[index, 'top_c_industries'] = "other"
 
+    # list of columns to be processed
+    cols2 = ['p_industries', 'top_p_industries', 'c_industries', 'top_c_industries']
     # convert the values in columns to strings
-    final_df['p_industries'] = final_df['p_industries'].astype(str)
-    final_df['top_p_industries'] = final_df['top_p_industries'].astype(str)
-    final_df['c_industries'] = final_df['c_industries'].astype(str)
-    final_df['top_c_industries'] = final_df['top_c_industries'].astype(str)
+    for col2 in cols2:
+      final_df[col2] = final_df[col2].astype(str)
     return final_df
-
 
 # a function to convert the known country names to the continents they belong
 # should first install pycountry and pycountry_convert
 def country_to_continent(country_name):
-    if country_name == 'unknown':
+    import pycountry_convert as pc
+    try:
+        if country_name.lower() == 'unknown':
+            return 'unknown'
+        else:
+            country_alpha2 = pc.country_name_to_country_alpha2(country_name)
+            country_continent_code = pc.country_alpha2_to_continent_code(country_alpha2)
+            country_continent_name = pc.convert_continent_code_to_continent_name(country_continent_code)
+            return country_continent_name
+    except KeyError:
         return 'unknown'
-    else:
-        country_alpha2 = pc.country_name_to_country_alpha2(country_name)
-        country_continent_code = pc.country_alpha2_to_continent_code(country_alpha2)
-        country_continent_name = pc.convert_continent_code_to_continent_name(country_continent_code)
-        return country_continent_name
 
-
-def format_numbers(df, column_name):
-    """Formats numbers in a column and replaces NaN values with 'no data'."""
-    df[column_name] = pd.to_numeric(df[column_name], errors='coerce')
-    df[column_name] = df[column_name].apply(lambda x: f"{x:,}M")
-    df[column_name] = df[column_name].astype(str)
-    df[column_name] = df[column_name].replace('nanM', 'no data', regex=True)
-    return df[column_name]
-
-
-def format_numbers(df, column_name):
-    """Formats numbers in a column and replaces NaN values with 'no data'."""
-    df_column = df[column_name].copy()
-    df_column = pd.to_numeric(df_column, errors='coerce')
-    df_column = df_column.apply(lambda x: f"{x:,}M")
-    df_column = df_column.astype(str)
-    df_column = df_column.replace("nanM", 'no data', inplace=True)
-
-    return df_column.rename(column_name)
-
-
-def tidy_columns(final_df):
-    # trim the date for revenue
-    final_df['p_total_revenue_date'] = final_df['p_total_revenue_date'].astype(str).str[:4]
-    final_df['c_total_revenue_date'] = final_df['c_total_revenue_date'].astype(str).str[:4]
-    # divide revenue by 1M and rename colum names
-    final_df.loc[final_df['p_total_revenue'].notnull(), 'p_total_revenue'] = final_df.loc[final_df[
-        'p_total_revenue'].notnull(), 'p_total_revenue'].astype(int) / 1000000
-    final_df.loc[final_df['c_total_revenue'].notnull(), 'c_total_revenue'] = final_df.loc[final_df[
-        'c_total_revenue'].notnull(), 'c_total_revenue'].astype(int) / 1000000
-    final_df = final_df.rename(
-        columns={'p_total_revenue': 'p_total_revenue_in_millions', 'c_total_revenue': 'c_total_revenue_in_millions'})
-    # format the revenue values and convert it to string
-    final_df.loc[final_df['p_total_revenue'].notnull(), 'p_total_revenue'] = final_df.loc[
-        final_df['p_total_revenue'].notnull(), 'p_total_revenue'].apply(lambda x: f"{x:,}M")
-    final_df.loc[final_df['c_total_revenue'].notnull(), 'c_total_revenue'] = final_df.loc[
-        final_df['c_total_revenue'].notnull(), 'c_total_revenue'].apply(lambda x: f"{x:,}M")
-
-    del final_df['proportionofLabel']
-    return final_df
 
     # class PostProcessor:
     #    def __init__(self, input):
@@ -515,12 +466,7 @@ class Cleaner:
         final_df = top_industries(final_df)
 
         # replace missing country values with "unknown"
-        final_df["parent_country"] = final_df["parent_country"].replace("", np.nan)
-        final_df["child_country"] = final_df["child_country"].replace("", np.nan)
-        mask_p = final_df["parent_country"].isna()
-        mask_c = final_df["child_country"].isna()
-        final_df.loc[mask_p, "parent_country"] = "unknown"
-        final_df.loc[mask_c, "child_country"] = "unknown"
+        final_df[["parent_country", "child_country"]] = final_df[["parent_country", "child_country"]].replace({"": np.nan, np.nan: "unknown"})
 
         # apply the country_to_continent function to get the continents the companies are located
         final_df['parent_continent'] = final_df['parent_country'].apply(country_to_continent)
@@ -542,5 +488,7 @@ class Cleaner:
             final_df['p_total_revenue_in_millions'].notnull(), 'p_total_revenue_in_millions'].apply(lambda x: f"{x:,}M")
         final_df.loc[final_df['c_total_revenue_in_millions'].notnull(), 'c_total_revenue_in_millions'] = final_df.loc[
             final_df['c_total_revenue_in_millions'].notnull(), 'c_total_revenue_in_millions'].apply(lambda x: f"{x:,}M")
-
+        #fill the empty revenue values with "no data"
+        final_df['p_total_revenue_in_millions'] = final_df['p_total_revenue_in_millions'].fillna("no data")
+        final_df['c_total_revenue_in_millions'] = final_df['c_total_revenue_in_millions'].fillna("no data")
         return final_df
