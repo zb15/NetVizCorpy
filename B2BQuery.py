@@ -472,17 +472,17 @@ class Querier:
         elif self.index == 2:
             query = self.query_get_parent_info
         elif self.index == 3:
-            query = self.query_has_ownerof
-        elif self.index == 4:
-            query = self.query_get_ownerof_info
-        elif self.index == 5:
             query = self.query_has_owned_by
-        elif self.index == 6:
+        elif self.index == 4:
             query = self.query_get_owned_by_info
-        elif self.index == 7:
+        elif self.index == 5:
             query = self.query_has_subsidiary
-        elif self.index == 8:
+        elif self.index == 6:
             query = self.query_get_subsidiary_info
+        elif self.index == 7:
+            query = self.query_has_ownerof
+        elif self.index == 8:
+            query = self.query_get_ownerof_info
         elif self.index == 9:
             query = self.query_is_human
         elif self.index == 0:
