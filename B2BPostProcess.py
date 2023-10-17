@@ -477,9 +477,9 @@ class Cleaner:
         final_df['c_total_revenue_date'] = final_df['c_total_revenue_date'].astype(str).str[:4]
         # divide revenue by 1M and rename colum names
         final_df.loc[final_df['p_total_revenue'].notnull(), 'p_total_revenue'] = final_df.loc[final_df[
-            'p_total_revenue'].notnull(), 'p_total_revenue'].astype('int64') / 1000000
+            'p_total_revenue'].notnull(), 'p_total_revenue'].astype('float') / 1000000
         final_df.loc[final_df['c_total_revenue'].notnull(), 'c_total_revenue'] = final_df.loc[final_df[
-            'c_total_revenue'].notnull(), 'c_total_revenue'].astype('int64') / 1000000
+            'c_total_revenue'].notnull(), 'c_total_revenue'].astype('float') / 1000000
         final_df = final_df.rename(
             columns={'p_total_revenue': 'p_total_revenue_in_millions',
                      'c_total_revenue': 'c_total_revenue_in_millions'})
