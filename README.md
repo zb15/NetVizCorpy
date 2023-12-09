@@ -7,9 +7,9 @@
 
 ## Overview
 
-The package is hosted at [https://github.com/zb15/B2BNetworkWiki](https://github.com/zb15/B2BNetworkWiki) and can be installed as,
+The package is hosted at [https://github.com/zb15/CorpWiZ](https://github.com/zb15/CorpWiZ) and can be installed as,
 
-> `pip install B2BNetworkWiki`
+> `pip install CorpWiZ`
 
 Currently it has 3 main functions:            
 
@@ -87,7 +87,7 @@ EXAMPLE - NEED TO UPDATE WITH CURRENT PROJECT IF NEEDED
 
 Please cite the code and work in this repository as follows:
 
-> Baruwa, Zsofia, & Li, Shujun & Zhu, Zhen. (2023). ... https://doi.org/ ...
+> Baruwa, Zsofia, & Li, Shujun & Zhu, Zhen & Yuan, Haijue. (2023). ... https://doi.org/ ...
 
 
 ### Bibtex citation
@@ -96,9 +96,10 @@ Please cite the code and work in this repository as follows:
 @software{baruwa_zsofia_2023_001,
   author       = {Baruwa, Zsofia and
                   Li, Shujun and
-                  Zhu, Zhen},
-  title        = {{B2BNetworkWiki: Exploring companies'
-                  (B2B) networks from the publicly available WikiData}},
+                  Zhu, Zhen and
+                  Yuan, Haiyue},
+  title        = {{CorpWiZ: Visualising corporate group(s)'
+                  networks from the publicly available WikiData}},
   month        = aug,
   year         = 2023,
   publisher    = {...},
