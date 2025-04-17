@@ -21,7 +21,7 @@ class Searcher:
             query = f""" SELECT distinct ?item ?QID ?itemLabel ?itemDescription
             WHERE{{
               ?item rdfs:label ?itemLabel.
-              FILTER(REGEX(?itemLabel, ?name )).
+              FILTER(REGEX(?itemLabel, ?name, "i" )).
               VALUES ?name {{"^{self.company}$"@en "^{self.company} "@en "^{self.company}, "@en}} .
               FILTER(LANG(?itemLabel)="en").
               ?item wdt:P31 ?type .
