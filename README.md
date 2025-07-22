@@ -2,12 +2,12 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![ORCID: Baruwa](https://img.shields.io/badge/ORCID-0000--0003--2933--0890-brightgreen)](https://orcid.org/0000-0003-2933-0890)
 
-# B2BNetworkWiki
-# Exploring companies' (B2B) networks from the publicly available WikiData
+# NetVizCorpy
+# Network Vizualisation tool for exploring companies' corporate ownership from the publicly available WikiData
 
 ## Overview
 
-The package is hosted at [https://github.com/zb15/CorpWiZ](https://github.com/zb15/CorpWiZ) and can be installed as,
+The package is hosted at [https://github.com/zb15/NetVizCorpy](https://github.com/zb15/NetVizCorpy) and can be installed as,
 
 > `pip install CorpWiZ`
 
