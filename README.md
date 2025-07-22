@@ -3,7 +3,7 @@
 [![ORCID: Baruwa](https://img.shields.io/badge/ORCID-0000--0003--2933--0890-brightgreen)](https://orcid.org/0000-0003-2933-0890)
 
 # NetVizCorpy
-# Network Vizualisation tool for exploring companies' corporate ownership from the publicly available WikiData
+# Network Vizualisation tool for exploring companies' Corporate ownership from the publicly available WikiData
 
 ## Overview
 
