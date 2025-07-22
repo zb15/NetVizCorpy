@@ -17,10 +17,10 @@ __all__ = [
 ]
 
 #from .version import __version__
-from .query import Querier
-from .identifyQIDs import Searcher
-from .deriveNetwork import NetworkBuilder
-from .postProcess import Cleaner
-from .visualiseNetwork import Visualiser
+from modules.query import Querier
+from modules.identifyQIDs import Searcher
+from modules.deriveNetwork import NetworkBuilder
+from modules.postProcess import Cleaner
+from modules.visualiseNetwork import Visualiser
 
 

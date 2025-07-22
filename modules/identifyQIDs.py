@@ -20,19 +20,19 @@ class Searcher:
             # Constructing the SPARQL query
             query = f""" SELECT distinct ?item ?QID ?itemLabel ?itemDescription
             WHERE{{
-              ?item rdfs:label ?itemLabel.
-              FILTER(REGEX(?itemLabel, ?name, "i" )).
-              VALUES ?name {{"^{self.company}$"@en "^{self.company} "@en "^{self.company}, "@en}} .
-              FILTER(LANG(?itemLabel)="en").
-              ?item wdt:P31 ?type .
-              VALUES ?type {{wd:Q4830453 wd:Q783794 wd:Q6881511 wd:Q167037 wd:Q21980538 wd:Q891723 wd:Q786820 wd:Q43229 wd:Q1058914
-                                    wd:Q18388277 wd:Q161726 wd:Q778575 wd:Q2005696 wd:Q108460239 wd:Q3477381 wd:Q270791 wd:Q936518
-                                    wd:Q1934969 wd:Q2538889 wd:Q2995256 wd:Q1631129 wd:Q1276157 wd:Q5038204 wd:Q217107 wd:Q13235160
-                                    wd:Q17377208 wd:Q740752 wd:Q249556}} . #to search multiple entities
+                ?item rdfs:label ?itemLabel.
+                FILTER(REGEX(?itemLabel, ?name, "i" )).
+                VALUES ?name {{"^{self.company}$"@en "^{self.company} "@en "^{self.company}, "@en}} .
+                FILTER(LANG(?itemLabel)="en").
+                ?item wdt:P31 ?type .
+                VALUES ?type {{wd:Q4830453 wd:Q783794 wd:Q6881511 wd:Q167037 wd:Q21980538 wd:Q891723 wd:Q786820 wd:Q43229 wd:Q1058914
+                                wd:Q18388277 wd:Q161726 wd:Q778575 wd:Q2005696 wd:Q108460239 wd:Q3477381 wd:Q270791 wd:Q936518
+                                wd:Q1934969 wd:Q2538889 wd:Q2995256 wd:Q1631129 wd:Q1276157 wd:Q5038204 wd:Q217107 wd:Q13235160
+                                wd:Q17377208 wd:Q740752 wd:Q249556}} . #to search multiple entities
 
-              ?article schema:about ?item .
-              ?article schema:inLanguage "en" .
-              ?article schema:isPartOf <https://en.wikipedia.org/>.
+                ?article schema:about ?item .
+                ?article schema:inLanguage "en" .
+                ?article schema:isPartOf <https://en.wikipedia.org/>.
             #the next 3 lines will give the QID in the column QID
             #This query will bind the substring of ?uri starting from the 32nd character to a new variable ?code
             BIND (STR (?item) AS ?uri) .

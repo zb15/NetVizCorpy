@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-#from query import Querier
-import pycountry_convert as pc 
+from query import Querier
+import pycountry_convert as pc
 
 
 def is_human(wikidata_id):

@@ -12,23 +12,23 @@ class Querier:
             "Mozilla/5.0 (X11; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0",
             "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Mobile/15E148 Safari/604.1"]
         self.query_has_parent = f""" SELECT ?parent (IF (BOUND(?parent), COUNT(DISTINCT ?parent), 0) AS ?count)
-                                  WHERE {{
-                                        VALUES ?item {{wd:{qid}}}.
-                                        ?item wdt:P31 ?type .
-                                        VALUES ?type {{wd:Q4830453 wd:Q783794 wd:Q6881511 wd:Q167037 wd:Q21980538 wd:Q891723 wd:Q786820 wd:Q43229 wd:Q1058914
-                                                    wd:Q18388277 wd:Q161726 wd:Q778575 wd:Q2005696 wd:Q108460239 wd:Q3477381 wd:Q270791 wd:Q936518
-                                                    wd:Q1934969 wd:Q2538889 wd:Q2995256 wd:Q1631129 wd:Q1276157 wd:Q5038204 wd:Q217107 wd:Q13235160
-                                                    wd:Q17377208 wd:Q740752 wd:Q249556}} . #to search multiple entities
-                                        ?article schema:about ?item .
-                                        ?article schema:inLanguage "en" .
-                                        ?article schema:isPartOf <https://en.wikipedia.org/>.
+                                          WHERE {{
+                                                VALUES ?item {{wd:{qid}}}.
+                                                ?item wdt:P31 ?type .
+                                                VALUES ?type {{wd:Q4830453 wd:Q783794 wd:Q6881511 wd:Q167037 wd:Q21980538 wd:Q891723 wd:Q786820 wd:Q43229 wd:Q1058914
+                                                            wd:Q18388277 wd:Q161726 wd:Q778575 wd:Q2005696 wd:Q108460239 wd:Q3477381 wd:Q270791 wd:Q936518
+                                                            wd:Q1934969 wd:Q2538889 wd:Q2995256 wd:Q1631129 wd:Q1276157 wd:Q5038204 wd:Q217107 wd:Q13235160
+                                                            wd:Q17377208 wd:Q740752 wd:Q249556}} . #to search multiple entities
+                                                #?article schema:about ?item .
+                                                #?article schema:inLanguage "en" .
+                                                #?article schema:isPartOf <https://en.wikipedia.org/>.
 
-                                        OPTIONAL {{ ?item wdt:P749 ?parent. }}
+                                                OPTIONAL {{ ?item wdt:P749 ?parent. }}
 
-                                        SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
-                                        }}
-                                        GROUP BY ?parent
-                                  """
+                                                SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
+                                                }}
+                                                GROUP BY ?parent
+                                          """
 
         self.query_get_parent_info = f"""
                                     SELECT DISTINCT ?item
@@ -51,76 +51,78 @@ class Querier:
                                                     ?starttime
                                                     ?endtime
                                     WHERE {{
-                                      VALUES ?item {{wd:{qid}}}.
-                                      #?item wdt:P31 ?type .
-                                      ?article schema:about ?item .
-                                      ?article schema:inLanguage "en" .
-                                      ?article schema:isPartOf <https://en.wikipedia.org/>.
+                                              VALUES ?item {{wd:{qid}}}.
+                                              #?item wdt:P31 ?type .
+                                              #?article schema:about ?item .
+                                              #?article schema:inLanguage "en" .
+                                              #?article schema:isPartOf <https://en.wikipedia.org/>.
 
-                                        OPTIONAL {{ ?item rdfs:label ?itemLabel. FILTER(LANG(?itemLabel) = "en") }}
-                                        OPTIONAL {{ ?item     wdt:P17    ?itemcountry .
-                                                    ?itemcountry  rdfs:label  ?itemcountryLabel
-                                                    FILTER ( LANGMATCHES ( LANG ( ?itemcountryLabel ), "en" ) )
-                                                  }}
-                                        OPTIONAL {{ ?item     wdt:P452    ?industry .
-                                                    ?industry  rdfs:label  ?industryLabel
-                                                    FILTER ( LANGMATCHES ( LANG ( ?industryLabel ), "en" ) )
-                                                  }}
-                                        OPTIONAL {{ ?item     wdt:P2139     ?revenue. }}
-                                        OPTIONAL {{ ?item p:P2139 [ps:P2139 ?revenue;  pq:P585  ?revenueDate] }}
-                                        OPTIONAL {{ ?item wdt:P749 ?parent. }}
-                                        OPTIONAL {{ ?parent     wdt:P452    ?pindustry .
-                                                    ?pindustry  rdfs:label  ?pindustryLabel
-                                                    FILTER ( LANGMATCHES ( LANG ( ?pindustryLabel ), "en" ) )
-                                                  }}
-                                        OPTIONAL {{ ?parent     wdt:P17    ?parentcountry .
-                                                    ?parentcountry  rdfs:label  ?parentcountryLabel
-                                                    FILTER ( LANGMATCHES ( LANG ( ?parentcountryLabel ), "en" ) )
-                                                  }}
-                                        OPTIONAL {{ ?parent     wdt:P2139     ?prevenue. }}
-                                        OPTIONAL {{ ?parent  p:P2139 [ps:P2139 ?prevenue; pq:P585  ?prevenueDate] }}
-                                        OPTIONAL {{ ?item  p:P749 [ps:P749 ?parent; pq:P1107 ?proportion] }}
-                                        OPTIONAL {{
-                                                  ?item  p:P749 [ps:P749 ?parent; pq:P642 ?proportionof] .
-                                                  FILTER(?proportionof = wd:Q144368)
-                                                 }}
-                                        OPTIONAL {{ ?item p:P749 [ps:P749 ?parent; pq:P585 ?pointoftime] }}
-                                        OPTIONAL {{?item p:P749 [ps:P749 ?parent; pq:P1107 ?proportion; pq:P585 ?pointoftime].
-                                                  FILTER(NOT EXISTS {{?item p:P749 [ps:P749 ?parent; pq:P585 ?earlierTime; ?earlierTime [wdt:P585 ?pointoftime]]}})
-                                                  }}
-                                        #OPTIONAL {{
-                                        #          ?item p:P749 [ps:P749 ?parent; pq:P585 ?pointoftime] .
-                                        #          FILTER(BOUND(?pointoftime) && DATATYPE(?pointoftime) = xsd:dateTime).
-                                        #          # get the latest record first
-                                        #         BIND(NOW() - ?pointoftime AS ?distance).
-                                        #          FILTER (MIN (?distance)) .
-                                        #         }}
-                                        OPTIONAL {{ ?item  p:P749 [ps:P749 ?parent; pq:P580 ?starttime] }}
-                                        OPTIONAL {{ ?item  p:P749 [ps:P749 ?parent; pq:P582 ?endtime] }}
-                                      SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
+                                                OPTIONAL {{ ?item rdfs:label ?itemLabel. FILTER(LANG(?itemLabel) = "en") }}
+                                                OPTIONAL {{ ?item     wdt:P17    ?itemcountry .
+                                                            ?itemcountry  rdfs:label  ?itemcountryLabel
+                                                            FILTER ( LANGMATCHES ( LANG ( ?itemcountryLabel ), "en" ) )
+                                                          }}
+                                                OPTIONAL {{ ?item     wdt:P452    ?industry .
+                                                            ?industry  rdfs:label  ?industryLabel
+                                                            FILTER ( LANGMATCHES ( LANG ( ?industryLabel ), "en" ) )
+                                                          }}
+                                                OPTIONAL {{ ?item     wdt:P2139     ?revenue. }}
+                                                OPTIONAL {{ ?item p:P2139 [ps:P2139 ?revenue;  pq:P585  ?revenueDate] }}
+                                                OPTIONAL {{ ?item wdt:P749 ?parent. }}
+                                                OPTIONAL {{ ?parent     wdt:P452    ?pindustry .
+                                                            ?pindustry  rdfs:label  ?pindustryLabel
+                                                            FILTER ( LANGMATCHES ( LANG ( ?pindustryLabel ), "en" ) )
+                                                          }}
+                                                OPTIONAL {{ ?parent     wdt:P17    ?parentcountry .
+                                                            ?parentcountry  rdfs:label  ?parentcountryLabel
+                                                            FILTER ( LANGMATCHES ( LANG ( ?parentcountryLabel ), "en" ) )
+                                                          }}
+                                                OPTIONAL {{ ?parent     wdt:P2139     ?prevenue. }}
+                                                OPTIONAL {{ ?parent  p:P2139 [ps:P2139 ?prevenue; pq:P585  ?prevenueDate] }}
+                                                OPTIONAL {{ ?item  p:P749 [ps:P749 ?parent; pq:P1107 ?proportion] }}
+                                                OPTIONAL {{
+                                                          ?item  p:P749 [ps:P749 ?parent; pq:P642 ?proportionof] .
+                                                          FILTER(?proportionof = wd:Q144368)
+                                                         }}
+                                                OPTIONAL {{ ?item p:P749 [ps:P749 ?parent; pq:P585 ?pointoftime] }}
+                                                OPTIONAL {{?item p:P749 [ps:P749 ?parent; pq:P1107 ?proportion; pq:P585 ?pointoftime].
+                                                          FILTER(NOT EXISTS {{?item p:P749 [ps:P749 ?parent; pq:P585 ?earlierTime; ?earlierTime [wdt:P585 ?pointoftime]]}})
+                                                          }}
+                                                #OPTIONAL {{
+                                                #          ?item p:P749 [ps:P749 ?parent; pq:P585 ?pointoftime] .
+                                                #          FILTER(BOUND(?pointoftime) && DATATYPE(?pointoftime) = xsd:dateTime).
+                                                #          # get the latest record first
+                                                #         BIND(NOW() - ?pointoftime AS ?distance).
+                                                #          FILTER (MIN (?distance)) .
+                                                #         }}
+                                                OPTIONAL {{ ?item  p:P749 [ps:P749 ?parent; pq:P580 ?starttime] }}
+                                                OPTIONAL {{ ?item  p:P749 [ps:P749 ?parent; pq:P582 ?endtime] }}
+                                              SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
                                     }}
                                     GROUP BY  ?item ?QID ?itemLabel ?itemcountryLabel ?revenue ?revenueDate ?parent ?pQID ?parentLabel ?parentcountryLabel ?prevenue ?prevenueDate ?proportion ?proportionofLabel ?pointoftime ?starttime ?endtime
                                     ORDER BY ?parentLabel
                                     LIMIT 10000
                                     """
+
         self.query_has_owned_by = f""" SELECT ?ownedby (IF (BOUND(?ownedby), COUNT(DISTINCT ?ownedby), 0) AS ?count)
-                                  WHERE {{
-                                        VALUES ?item {{wd:{qid}}}.
-                                        ?item wdt:P31 ?type .
-                                        VALUES ?type {{wd:Q4830453 wd:Q783794 wd:Q6881511 wd:Q167037 wd:Q21980538 wd:Q891723 wd:Q786820 wd:Q43229 wd:Q1058914
-                                                    wd:Q18388277 wd:Q161726 wd:Q778575 wd:Q2005696 wd:Q108460239 wd:Q3477381 wd:Q270791 wd:Q936518
-                                                    wd:Q1934969 wd:Q2538889 wd:Q2995256 wd:Q1631129 wd:Q1276157 wd:Q5038204 wd:Q217107 wd:Q13235160
-                                                    wd:Q17377208 wd:Q740752 wd:Q249556}} . #to search multiple entities
-                                        ?article schema:about ?item .
-                                        ?article schema:inLanguage "en" .
-                                        ?article schema:isPartOf <https://en.wikipedia.org/>.
+                                    WHERE {{
+                                            VALUES ?item {{wd:{qid}}}.
+                                            ?item wdt:P31 ?type .
+                                            VALUES ?type {{wd:Q4830453 wd:Q783794 wd:Q6881511 wd:Q167037 wd:Q21980538 wd:Q891723 wd:Q786820 wd:Q43229 wd:Q1058914
+                                                            wd:Q18388277 wd:Q161726 wd:Q778575 wd:Q2005696 wd:Q108460239 wd:Q3477381 wd:Q270791 wd:Q936518
+                                                            wd:Q1934969 wd:Q2538889 wd:Q2995256 wd:Q1631129 wd:Q1276157 wd:Q5038204 wd:Q217107 wd:Q13235160
+                                                            wd:Q17377208 wd:Q740752 wd:Q249556}} . #to search multiple entities
+                                            #?article schema:about ?item .
+                                            #?article schema:inLanguage "en" .
+                                            #?article schema:isPartOf <https://en.wikipedia.org/>.
 
-                                        OPTIONAL {{ ?item wdt:P127 ?ownedby. }}
+                                            OPTIONAL {{ ?item wdt:P127 ?ownedby. }}
 
-                                        SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
-                                        }}
-                                        GROUP BY ?ownedby
-                                  """
+                                            SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
+                                            }}
+                                            GROUP BY ?ownedby
+                                    """
+
         self.query_get_owned_by_info = f"""
                                 SELECT DISTINCT ?item
                                                 (REPLACE(STR(?item), "http://www.wikidata.org/entity/", "") AS ?QID)
@@ -194,6 +196,7 @@ class Querier:
                                 ORDER BY ?ownedbyLabel
                                 LIMIT 10000
                                 """
+
         self.query_has_subsidiary = f""" SELECT ?subsidiary (IF (BOUND(?subsidiary), COUNT(DISTINCT ?subsidiary), 0) AS ?count)
                                       WHERE {{
                                             VALUES ?item {{wd:{qid}}}.
@@ -202,9 +205,9 @@ class Querier:
                                                         wd:Q18388277 wd:Q161726 wd:Q778575 wd:Q2005696 wd:Q108460239 wd:Q3477381 wd:Q270791 wd:Q936518
                                                         wd:Q1934969 wd:Q2538889 wd:Q2995256 wd:Q1631129 wd:Q1276157 wd:Q5038204 wd:Q217107 wd:Q13235160
                                                         wd:Q17377208 wd:Q740752 wd:Q249556}} . #to search multiple entities
-                                            ?article schema:about ?item .
-                                            ?article schema:inLanguage "en" .
-                                            ?article schema:isPartOf <https://en.wikipedia.org/>.
+                                            #?article schema:about ?item .
+                                            #?article schema:inLanguage "en" .
+                                            #?article schema:isPartOf <https://en.wikipedia.org/>.
 
                                             OPTIONAL {{ ?item wdt:P355 ?subsidiary. }}
 
@@ -212,6 +215,7 @@ class Querier:
                                             }}
                                             GROUP BY ?subsidiary
                                       """
+
         self.query_get_subsidiary_info = f"""
                                     SELECT DISTINCT ?item
                                                     (REPLACE(STR(?item), "http://www.wikidata.org/entity/", "") AS ?QID)
@@ -235,9 +239,9 @@ class Querier:
                                     WHERE {{
                                       VALUES ?item {{wd:{qid}}}.
                                       #?item wdt:P31 ?type .
-                                      ?article schema:about ?item .
-                                      ?article schema:inLanguage "en" .
-                                      ?article schema:isPartOf <https://en.wikipedia.org/>.
+                                      #?article schema:about ?item .
+                                      #?article schema:inLanguage "en" .
+                                      #?article schema:isPartOf <https://en.wikipedia.org/>.
 
                                         OPTIONAL {{ ?item rdfs:label ?itemLabel. FILTER(LANG(?itemLabel) = "en") }}
                                         OPTIONAL {{ ?item     wdt:P17    ?itemcountry .
@@ -293,9 +297,9 @@ class Querier:
                                                     wd:Q18388277 wd:Q161726 wd:Q778575 wd:Q2005696 wd:Q108460239 wd:Q3477381 wd:Q270791 wd:Q936518
                                                     wd:Q1934969 wd:Q2538889 wd:Q2995256 wd:Q1631129 wd:Q1276157 wd:Q5038204 wd:Q217107 wd:Q13235160
                                                     wd:Q17377208 wd:Q740752 wd:Q249556}} . #to search multiple entities
-                                        ?article schema:about ?item .
-                                        ?article schema:inLanguage "en" .
-                                        ?article schema:isPartOf <https://en.wikipedia.org/>.
+                                        #?article schema:about ?item .
+                                        #?article schema:inLanguage "en" .
+                                        #?article schema:isPartOf <https://en.wikipedia.org/>.
 
                                         OPTIONAL {{ ?item wdt:P1830 ?ownerof. }}
 
@@ -303,6 +307,7 @@ class Querier:
                                         }}
                                         GROUP BY ?ownerof
                                   """
+
         self.query_get_ownerof_info = f"""
                                     SELECT DISTINCT ?item
                                                     (REPLACE(STR(?item), "http://www.wikidata.org/entity/", "") AS ?QID)
@@ -326,9 +331,9 @@ class Querier:
                                     WHERE {{
                                       VALUES ?item {{wd:{qid}}}.
                                       #?item wdt:P31 ?type .
-                                      ?article schema:about ?item .
-                                      ?article schema:inLanguage "en" .
-                                      ?article schema:isPartOf <https://en.wikipedia.org/>.
+                                      #?article schema:about ?item .
+                                      #?article schema:inLanguage "en" .
+                                      #?article schema:isPartOf <https://en.wikipedia.org/>.
 
                                         OPTIONAL {{ ?item rdfs:label ?companyLabel. FILTER(LANG(?companyLabel) = "en") }}
                                         OPTIONAL {{ ?item     wdt:P17    ?itemcountry .
@@ -376,6 +381,7 @@ class Querier:
                                     ORDER BY ?ownerofLabel
                                     LIMIT 10000
                                     """
+
         self.query_is_human = f"""
                                 SELECT DISTINCT
                                         ?human
@@ -385,13 +391,14 @@ class Querier:
                               WHERE {{
                                     VALUES ?human {{wd:{qid}}} .
                                     ?human wdt:P31/wdt:P279* wd:Q5 .
-                                    ?article schema:about ?human .
-                                    ?article schema:inLanguage "en" .
-                                    ?article schema:isPartOf <https://en.wikipedia.org/>.
+                                    #?article schema:about ?human .
+                                    #?article schema:inLanguage "en" .
+                                    #?article schema:isPartOf <https://en.wikipedia.org/>.
                                     SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
                                     FILTER (LANG (?humanDescription) = "en")
                                     }}
                             """
+
         self.query_get_description =  f""" SELECT DISTINCT
                                 ?item
                                 (REPLACE(STR(?item), "http://www.wikidata.org/entity/", "") AS ?QID)
