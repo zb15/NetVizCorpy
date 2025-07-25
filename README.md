@@ -31,6 +31,20 @@ cd NetVizCorpy
 pip install -e .
 ```
 
+## Dependencies
+
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
+
+The following packages need to be installed:
+
+> `pip install pyvis`
+
+> `pip install pycountry`
+
+> `pip install pycountry-convert`
+
+
+
 ## 🧩 Usage Example
 
 > `import NetVizCorpy`
@@ -97,19 +111,6 @@ The materials and methods in this repository support researchers and industry pr
 MIT Licence
 Zsofia Baruwa
 Copyright (c) 2025 University of Kent
-
-
-## Dependencies
-
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
-
-The following packages need to be installed:
-
-> `pip install pyvis`
-
-> `pip install pycountry`
-
-> `pip install pycountry-convert`
 
 
 ## Citation
