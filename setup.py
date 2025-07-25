@@ -4,6 +4,12 @@ setup(
     name="NetVizCorpy",
     version="0.1.0",
     packages=find_packages(),
+    install_requires=[
+        'pandas',
+        'numpy',
+        # any other dependencies
+    ],
+
     author="Zsofia Baruwa",
     author_email="zb78@kent.ac.uk",
     description="Visualise corporate relationships using WikiData in multi-level B2B networks",
