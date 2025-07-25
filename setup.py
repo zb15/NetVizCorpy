@@ -7,7 +7,7 @@ setup(
     author="Zsofia Baruwa",
     author_email="zb78@kent.ac.uk",
     description="Visualise corporate relationships using WikiData in multi-level B2B networks",
-    long_description=open("README.md").read(),
+    long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/zb15/NetVizCorpy",
     classifiers=[
