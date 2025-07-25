@@ -9,7 +9,7 @@
 
 The package is hosted at [https://github.com/zb15/NetVizCorpy](https://github.com/zb15/NetVizCorpy) and can be installed as,
 
-> `pip install CorpWiZ`
+> `pip install NetVizCorpy`
 
 Currently it has 3 main functions:            
 
