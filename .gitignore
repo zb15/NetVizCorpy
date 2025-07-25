@@ -1,0 +1,48 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.pyo
+
+# Virtual environment
+venv/
+.env/
+*.egg-info/
+.dist/
+build/
+*.egg
+pip-wheel-metadata/
+
+# IDE & editor configs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Logs and dumps
+*.log
+*.out
+
+# HTML visualisation outputs
+*.html
+
+# Company-specific visual outputs (e.g., VolvoCars_Level3_Demo.html)
+*_Level*_Demo.html
+
+# CSV or temporary data exports
+*.csv
+*.tsv
+*.xlsx
+*.json
+
+# Test outputs and debugging assets
+tests/output/
+debug/

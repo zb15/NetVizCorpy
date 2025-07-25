@@ -1,11 +1,11 @@
-from NetVizCorpy import Searcher, NetworkBuilder, Cleaner, Visualiser
+import NetVizCorpy
 
 ### Step 1: Search companies
 # -> it will return a QID (identifier)and the name of the company as it appears in WikiData
 # use search 'all' when company name is only partially known
 #company_a = Searcher('Volvo', 'all').choose_company()
 # use search 'exact' when the company name is known exactly as it appears in WikiData
-company_a = Searcher('Volvo Cars', 'exact').choose_company()
+company_a = NetVizCorpy.Searcher('Volvo Cars', 'exact').choose_company()
 # could add more seed companies
 #company_b = Searcher('Hyundai Motor Company', 'exact').choose_company()
 
@@ -19,10 +19,10 @@ QIDs = [company_a[0][0]]
 # and the last two positions indicate downward relations, such as:
 # (parent companies, owned by -shareholders-, subsidiaries, owner of -has share in-)
 levels = (3,3,3,3)
-companyNetwork = NetworkBuilder(QIDs, levels).get_companies_network()
+companyNetwork = NetVizCorpy.NetworkBuilder(QIDs, levels).get_companies_network()
 
 ### Step 3: Clean data for visualisation
-cleanedNetwork = Cleaner(companyNetwork).clean_join()
+cleanedNetwork = NetVizCorpy.Cleaner(companyNetwork).clean_join()
 
 ### Step 4: Visualisation (a local file named as VolvoCars_Level3_Demo.html will be created)
-Visualiser(cleanedNetwork, "VolvoCars_Level3_Demo").visualise_b2b_network()
+NetVizCorpy.Visualiser(cleanedNetwork, "VolvoCars_Level3_Demo").visualise_b2b_network()
