@@ -3,168 +3,62 @@
 [![ORCID: Baruwa](https://img.shields.io/badge/ORCID-0000--0003--2933--0890-brightgreen)](https://orcid.org/0000-0003-2933-0890)
 
 # NetVizCorpy
-# Network Vizualisation tool for exploring companies' Corporate ownership from the publicly available WikiData
+**NetVizCorpy** is a Python toolkit for constructing and exploring multi-level corporate ownership networks using WikiData. It enables customisable visualisations of parent-subsidiary relationships, shareholder links, and B2B connectivity, supporting research, due diligence, and network analysis. Since, the data is queried from WikiData with each run, slight differences could occur once a new or updated item is searched again.
 
-## Overview
+## 🚀 Features
+
+- 🔍 Query WikiData for corporate ownership and shareholder data  
+- 🕸️ Build nested network graphs of legal entities and relationships  
+- 🖼️ Generate interactive visualisations for stakeholder engagement  
+- 📦 Modular API designed for extensibility and reproducibility  
+- 💼 Supports a broad range of analysis  
+
+## 📦 Installation
 
 The package is hosted at [https://github.com/zb15/NetVizCorpy](https://github.com/zb15/NetVizCorpy) and can be installed as,
 
 > `pip install NetVizCorpy`
 
-Currently it has 3 main functions:            
+Or clone the repository directly:
 
-1.   choose_company()
-2.   get_companies_network()
-3.   visualise_b2b_network()
-
-The **choose_company(input_name, search_option='all')** allows user to search companies with various search options: exact match; starts with the input plus space; 
-starts with the input plus comma plus space, or as default all options.
-User can search and choose any number of companies, and will need to save the QIDs only to a list to use them in the next function.
-
-The **get_companies_network(QIDs, num_runs=(5,5,5,5))** has 4 sets of sub-functions (e.g., has_parent() and if it does then get_parent_info()) 
-to query the different relations (parent, owned by, subsidiary and owner of) plus some cleaning functions. It returns the max 4 dataframes
-(p_df, ob_df, s_df, oo_df) (empty if it is requested to be 0).  
-
-The **visualise_b2b_network(final_df)** function has 2 steps at the moment (that can easily be made into 1 function). 
-The 1st step (with clean_and_join(p_df, ob_df, s_df, oo_df) function) is to clean the 4 datasets and join them together into a "final_df". 
-The WikiData requires a lot of cleaning, handling duplicates etc. and comments are included within (the quite long) code. 
-And the function that visualises the network from "final_df" dataframe (visualise_b2b_network()). 
-
-The materials and methods in this repository support researchers and industry professionals to explore the sometimes over complicated corporate group structures in 
-a user friendly interface as perceived by the public. 
-
-MIT Licence
-
-Copyright (c) 2023 Zsofia Baruwa
-
-<hr>
-
-**Table of Contents**
-- [Overview](#overview)
-- [Author ORCIDs](#author-orcids)
-- [Dependencies](#dependencies)
-- [Citation](#citation)
-  - [Bibtex Citation](#bibtex-citation)
-- [Usage](#usage)
-  - [Repo Structure](#repo-structure)
-  - [Download](#download)
-  - [Functions](#functions)
-- [Example](#example)
-- [Reference](#reference)
-- [Acknowledgements](#acknowledgements)
-
-<hr>
-
-## Author ORCIDs
-
-[![ORCID: Baruwa](https://img.shields.io/badge/ORCID-0000--0003--2933--0890-brightgreen)](https://orcid.org/0000-0003-2933-0890)
-
-## Dependencies
-[[back to top](#b2bnetworkwiki)]
-
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
-
-The following packages need to be installed:
-
-> `pip install pyvis`
-
-> `pip install pycountry`
-
-> `pip install pycountry-convert`
-
-**Online Alternatives**:
-EXAMPLE - NEED TO UPDATE WITH CURRENT PROJECT IF NEEDED
-
-[![Read the Docs](https://readthedocs.org/projects/pip/badge/?version=latest)](https://github.com/zb15/B2BNetworkWiki/README.md)
-
-* Visit our [jupyter book](https://...) for interactive code and explanatory text
-* Run out Jupyter notebooks in binder [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/.../HEAD)
-
-## Citation
-[[back to top](#b2bnetworkwiki)]
-
-**A citation to the repository would be appreciated if you use any of its contents in your research or job.**
-
-Please cite the code and work in this repository as follows:
-
-> Baruwa, Zsofia, & Li, Shujun & Zhu, Zhen & Yuan, Haijue. (2023). ... https://doi.org/ ...
-
-
-### Bibtex citation
-
-```bibtex
-@software{baruwa_zsofia_2023_001,
-  author       = {Baruwa, Zsofia and
-                  Li, Shujun and
-                  Zhu, Zhen and
-                  Yuan, Haiyue},
-  title        = {{CorpWiZ: Visualising corporate group(s)'
-                  networks from the publicly available WikiData}},
-  month        = aug,
-  year         = 2023,
-  publisher    = {...},
-  version      = {v1},
-  doi          = {...},
-  url          = {...}
-}
+```bash
+git clone https://github.com/zb15/NetVizCorpy.git
+cd NetVizCorpy
+pip install -e .
 ```
 
-## Usage
-[[back to top](#b2bnetworkwiki)]
+## 🧩 Usage Example
 
-B2BNetworkWiki allows User to search and choose companies and explore their corporate structure network in a user friendly format, as perceived by the public. Since, the data is queried from WikiData with each run, slight differences could occur once a new or updated item is searched again.
+> `import NetVizCorpy`
 
-The package has 3 main functions, and it has the following characteristics.
+**Step 1: Search companies**
+-> it will return a QID (identifier)and the name of the company as it appears in WikiData
+use search 'all' when company name is only partially known
+> `company_a = NetVizCorpy.Searcher('Volvo', 'all').choose_company()`
+or use search 'exact' when the company name is known exactly as it appears in WikiData
+> `company_a = NetVizCorpy.Searcher('Volvo Cars', 'exact').choose_company()`
+could add more seed companies
+> `company_b = NetVizCorpy.Searcher('Hyundai Motor Company', 'exact').choose_company()`
 
-### Function 1. **choose_company(input_name, search_options='all')**
+**Step 2: Prepare QIDs and levels for building the company network**
+-> make a list of the QIDs of the companies in scope
+> `QIDs = [company_a[0][0]]`
+or
+> `QIDs = [company_a[0][0], company_b[0][0], company_c[0][0]]`
+in case QIDs are already known, skip step 1 and call them directly
+> `QIDs = ['Q215293']`
+specify the levels of interest, where the first two positions indicate upward relations
+and the last two positions indicate downward relations, such as:
+parent companies, owned by -shareholders-, subsidiaries, owner of -has share in-
+> `levels = (3,3,3,3)`
+> `companyNetwork = NetVizCorpy.NetworkBuilder(QIDs, levels).get_companies_network()`
 
-This function takes two arguments and returns the QID and company name for every result based on the search option. 
+**Step 3: Clean data for visualisation**
+> `cleanedNetwork = NetVizCorpy.Cleaner(companyNetwork).clean_join()`
+cleanedNetwork will return as a dataframe that could be exported as an .csv file if needed for other analysis
 
-The *first* argument is to add the company's name (case sensitive).
-The *second* one has 4 different arguments to choose from, but not necessarily needed. If left out, then by default it is set to return 'all' search options.
-In case User knows the exact company name as appears on WikiData (e.g., "Tesla, Inc."), the 'exact' search option is recommended. 
-
-Other search options available are  
-
-*   'space' which will bring results that starts with the given input (e.g., "Tesla ") and
-*   'space_comma' which will return results that starts with user input followed by a comma and a space after (e.g., "Tesla, ").
-
-Once the companies are chosen, which could be any number of companies, their QIDs need to be stored in a list to pass on to the next Function. 
-
-### Function 2. **get_companies_network(QIDs, (5,5,5,5))**
-
-This function takes two arguments and returns 4 dataframes in a dictionary (even if any of the dataframe is empty). 
-
-The *first* argument needs to be a list of unique IDs starting with Q, that could be matched and used for query WikiData.
-The *second* one has 4 values in the argument to specify
-what level of each relation the user is interested in. By default it is set to (5,5,5,5), and in that case just the first args could be added. The levels could be specified as >0 integers. Beyond 5 levels in case big corporations it could take several minutes to return the results. The first position is to get parent companies, the second position is still upward relation, is to get who the companies are owned by. For example if User only interested in upwards relations for 3 levels of the chosen companies, then it could be specified as (3,3,0,0). The last two position is for getting subsidiaries and owner of relations.
-
-### Function 3. **visualise_b2b_network(final_df)**
-
-The **visualise_b2b_network()** function has 2 steps at the moment. The 1st step (with *clean_and_join(p_df, ob_df, s_df, oo_df)* function) is to clean the 4 datasets and join them together into one dataframe. It can take up to several minutes depending on the dataset sizes, and that is one of the reason these steps are separated (the joined dataset could also be used for other analytical purposes, not just visualising the network). The WikiData requires lots of cleaning, handling duplicates etc. and comments are included within the code file. It covers the following main cleaning processes (with assumptions):
-
-*   drop duplicates from each dataset (beyond exact same records): 
-
-      *   if proportion has values for both 'authorised capital' and 'voting interest' then only 'authorised capital' is kept;
-      *   the record with the most recent date is kept, the older one(s) dropped;
-      *   match the industries (it could result in duplicates the same pair with exactly the same values for each column except the randomness that could happen when there are more than one industry listed for either or both of the companies);
-
-*   mark those records that has an end date with a value of "4" in the proportion column in order to differentiate them on the graph
-
-*   mark parent relations (where no proportion is known) with a value of "2" for visualisation purposes
-
-*   the proportions whose values are unknown are marked with a value of "3" for the same purpose as before
-
-*   in case a company has more than one industry, then based on the most frequent industries in the ecosystem of the queried companies, the most frequent ones will be used for visualisation purposes (but all industries will be listed next to the company name once User hover over the node) 
-
-*   any record that has no industries, then it will be checked if it is a human and or something else (e.g., a brand) and the brief description will be visible instead of the industries on the graph
-
-*   countries will be visible next to the company names on the graph once User hover over the nodes, while the continent it belongs will be seen as various shapes of the nodes
-
-*   the final joined dataframe will have parent and child classification only for the companies, where the parent means the parent and owned by relations; and the child means both subsidiary and owner of relations.
-
-
-**Function 3.2** takes the resulting dataframe and visualise the network with the use of PyVis package (with the function *visualise_b2b_network(df)*).
+**Step 4: Visualisation (a local file named as VolvoCars_Level3_Demo.html will be created)**
+> `NetVizCorpy.Visualiser(cleanedNetwork, "VolvoCars_Level3_Demo").visualise_b2b_network()`
 
 *   The code will return a .html file that can be downloaded from colab and opened in any browser. It is a dynamic graph, that could be dragged if User wishes to explore the details more.
 
@@ -194,62 +88,54 @@ The **visualise_b2b_network()** function has 2 steps at the moment. The 1st step
    *   There is also an option for user to adjust the physics of the network graph. It's panel is located below the graph.
 
 
-### Repo Structure
-[[back to top](#b2bnetworkwiki)]
+The materials and methods in this repository support researchers and industry professionals to explore the sometimes over complicated corporate group structures in a user friendly interface as perceived by the public. 
 
+MIT Licence
+Zsofia Baruwa
+Copyright (c) 2025 University of Kent
+
+
+## Dependencies
+
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
+
+The following packages need to be installed:
+
+> `pip install pyvis`
+
+> `pip install pycountry`
+
+> `pip install pycountry-convert`
+
+
+## Citation
+
+**A citation to the repository would be appreciated if you use any of its contents in your research or job.**
+
+Please cite the code and work in this repository as follows:
+
+> Baruwa, Zsofia, & Li, Shujun & Zhu, Zhen & Yuan, Haijue. (2025). ... https://doi.org/ ...
+
+
+### Bibtex citation
+
+```bibtex
+@software{baruwa_zsofia_2025,
+  author       = {Baruwa, Zsofia and
+                  Li, Shujun and
+                  Zhu, Zhen and
+                  Yuan, Haiyue},
+  title        = {{NetVizCorpy: Visualising corporate group(s)'
+                  networks from the publicly available WikiData}},
+  month        = jul,
+  year         = 2025,
+  publisher    = {...},
+  version      = {v0.1.0},
+  doi          = {...},
+  url          = {...}
+}
 ```
-.
-├── binder
-│   └── environment.yml
-├── CITATION.cff
-├── _config.yml
-├── content
-│   ├── 01_setup
-│   ├── 02_funtion1
-│   ├── 03_function2
-│   ├── 04_function3
-│   └── front_page.md
-├── imgs
-├── LICENSE
-├── main.py
-├── README.md
-└── _toc.yml
-
-```
 
 
-* `binder` - contains the environment.yml file and all dependencies managed via conda - UPDATE THIS
-* `_config.yml` - configuration of our Jupyter Book - UPDATE THIS
-* `content` - the notebooks and markdown arranged by setup, funtion 1, function 2 and function 3. - UPDATE: DOES IT OK LIKE THIS OR JUST IN ONE FILE???
-* `imgs` - all image files used in the tutorial material
-* `LICENSE` - details of the MIT permissive license of this work.
-* `main.py` - an example to use B2BNetworkWiki
-* `README` - what you are reading now!
-* `_toc.yml` - the table of contents for our Jupyter Book.
-
-### Download
-[[back to top](#b2bnetworkwiki)]
-
-abc...
 
 
-### Functions
-[[back to top](#b2bnetworkwiki)]
-
-abc...
-
-## Example
-[[back to top](#b2bnetworkwiki)]
-
-An example use case for two electric vehicle companies' network can be explored in a [colab notebook](https://github.com/zb15/B2BNetworkWiki/blob/main/Example_B2BNetworkWiki.ipynb).
-
-...
-
-
-## Reference
-[[back to top](#b2bnetworkwiki)]
-...
-
-## Acknowledgements
-
-...
