@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from query import Querier
+from .query import Querier
 
 
 # Checking if entity has a parent, and if so how many
