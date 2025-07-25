@@ -2,11 +2,19 @@ from setuptools import setup, find_packages
 
 setup(
     name="NetVizCorpy",
-    version="0.1.3",
+    version="0.1.4",
     packages=find_packages(),
     install_requires=[
-        'pandas',
-        'numpy',
+        "pandas",
+        "numpy",
+        "pycountry",
+        "pycountry-convert",
+        "pyvis",
+        "seaborn",
+        "matplotlib",
+        "colorsys",
+        "collections",
+        
         # any other dependencies
     ],
 
