@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: >
+  If you use NetVizCorpy in your work, please cite it using the metadata below.
+title: NetVizCorpy
+version: 0.1.0
+doi: 10.17605/OSF.IO/N6ZAF  # Update once published in Global Networks
+date-released: 2025-07-25
+authors:
+  - family-names: Baruwa
+    given-names: Zsofia
+    affiliation: University of Kent, Kent Business School
+    orcid: https://orcid.org/0000-0003-2933-0890
+  - family-names: Yuan
+    given-names: Haiyue
+    affiliation: University of Kent, School of Computing
+    orcid: https://orcid.org/0000-0001-6084-6719
+- family-names: Li
+    given-names: Shujun
+    affiliation: University of Kent, School of Computing
+    orcid: https://orcid.org/0000-0001-5628-7328
+- family-names: Zhu
+    given-names: Zhen
+    affiliation: University of Kent, Kent Business School
+    orcid: https://orcid.org/0000-0003-0258-1454
+
+abstract: >
+  NetVizCorpy is a Python toolkit for building and visualising multi-level corporate ownership networks
+  using data from WikiData. It allows customisable exploration of parent-subsidiary relationships,
+  shareholder structures, and B2B connectivity, with outputs suited for analysis and stakeholder engagement.
+
+repository-code: https://github.com/zb15/NetVizCorpy
+license: MIT
+keywords:
+  - wikidata
+  - corporate networks
+  - B2B analysis
+  - network analysis
+  - ownership structures
