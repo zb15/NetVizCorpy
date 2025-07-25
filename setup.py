@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="NetVizCorpy",
-    version="0.1.4",
+    version="0.1.5",
     packages=find_packages(),
     install_requires=[
         "pandas",
@@ -14,7 +14,7 @@ setup(
         "matplotlib",
         "colorsys",
         "collections",
-        
+
         # any other dependencies
     ],
 
