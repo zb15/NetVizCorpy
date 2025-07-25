@@ -1,6 +1,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![ORCID: Baruwa](https://img.shields.io/badge/ORCID-0000--0003--2933--0890-brightgreen)](https://orcid.org/0000-0003-2933-0890)
+[![ORCID: Yuan](https://img.shields.io/badge/ORCID-0000--0001--6084--6719-brightgreen)](https://orcid.org/0000-0001-6084-6719)
+[![ORCID: Li](https://img.shields.io/badge/ORCID-0000--0001--5628--7328-brightgreen)](https://orcid.org/0000-0001-5628-7328)
+[![ORCID: Zhu](https://img.shields.io/badge/ORCID-0000--0003--0258--1454-brightgreen)](https://orcid.org/0000-0003-0258-1454)
+
 
 # NetVizCorpy
 **NetVizCorpy** is a Python toolkit for constructing and exploring multi-level corporate ownership networks using WikiData. It enables customisable visualisations of parent-subsidiary relationships, shareholder links, and B2B connectivity, supporting research, due diligence, and network analysis. Since, the data is queried from WikiData with each run, slight differences could occur once a new or updated item is searched again.
