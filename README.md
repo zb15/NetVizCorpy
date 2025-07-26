@@ -119,7 +119,7 @@ Copyright (c) 2025 University of Kent
 
 Please cite the code and work in this repository as follows:
 
-> Baruwa, Zsofia, & Li, Shujun & Zhu, Zhen & Yuan, Haijue. (2025). ... https://doi.org/ ...
+> Baruwa, Zsofia, & Li, Shujun & Zhu, Zhen & Yuan, Haiyue. (2025). ... https://doi.org/ ...
 
 
 ### Bibtex citation
