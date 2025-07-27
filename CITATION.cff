@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: >
   If you use NetVizCorpy in your work, please cite it using the metadata below.
 title: NetVizCorpy
-version: 0.1.0
+version: 0.1.7
 doi: 10.17605/OSF.IO/N6ZAF  # Update once published in Global Networks
 date-released: 2025-07-25
 authors:

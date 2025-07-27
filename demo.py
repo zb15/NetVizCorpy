@@ -1,7 +1,7 @@
 import NetVizCorpy as nvc
 # dependencies:
 #pip install pycountry
-#pip install ycountry-convert
+#pip install pycountry-convert
 #pip install pyvis
 
 ### Step 1: Search companies
