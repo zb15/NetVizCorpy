@@ -1,10 +1,10 @@
-cff-version: 1.2.0
+cff-version: 1.2.1
 message: >
   If you use NetVizCorpy in your work, please cite it using the metadata below.
-title: NetVizCorpy
-version: 0.1.7
-doi: 10.17605/OSF.IO/N6ZAF  # Update once published in Global Networks
-date-released: 2025-07-25
+title: Constructing and Analysing Global Corporate Networks With Wikidata: The Case of Electric Vehicle Industry
+version: NetVizCorpy 0.1.7
+doi: 10.1111/glob.70029 
+date-released: 2025-08
 authors:
   - family-names: Baruwa
     given-names: Zsofia
@@ -24,11 +24,19 @@ authors:
     orcid: https://orcid.org/0000-0003-0258-1454
 
 abstract: >
-  NetVizCorpy is a Python toolkit for building and visualising multi-level corporate ownership networks
-  using data from WikiData. It allows customisable exploration of parent-subsidiary relationships,
-  shareholder structures, and B2B connectivity, with outputs suited for analysis and stakeholder engagement.
+  Constructing comprehensive datasets for corporate network analysis remains a significant challenge for the business research
+community. This study introduces a novel Python tool, NetVizCorpy, which leverages Wikidata to generate such a dataset. We
+demonstrate its applications by constructing and analysing a global corporate network based on 44 seed electric vehicle (EV)
+companies and their three-level ownership structures. This dataset includes 1354 unique companies and 1575 ownership relations
+spanning 58 countries. We provide network characteristics, metrics and statistical insights, along with three detailed analytical
+applications. First, betweenness centrality identifies key influential companies, highlighting the role of financial institutions in
+industry resilience. Second, community detection reveals strategic positioning by EV manufacturers within global markets. Third,
+we find a nonlinear inverse U-shaped relationship between Global Network Connectivity (GNC) and Gross Competitive Intensity
+(GCI) at the country level. These findings offer new directions for understanding the resilience and competitiveness of the global
+EV industry.
 
 repository-code: https://github.com/zb15/NetVizCorpy
+supplementary material: https://doi.org/10.17605/OSF.IO/N6ZAF
 license: MIT
 keywords:
   - wikidata
