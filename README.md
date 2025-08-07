@@ -19,7 +19,7 @@
 
 ## 📦 Installation
 
-The package is hosted at [https://github.com/zb15/NetVizCorpy](https://github.com/zb15/NetVizCorpy) and can be installed as,
+The package is hosted at [https://github.com/zb15/NetVizCorpy](https://github.com/zb15/NetVizCorpy) and [https://pypi.org/project/NetVizCorpy/](https://pypi.org/project/NetVizCorpy/). It can be installed as,
 
 > `pip install NetVizCorpy`
 
