@@ -119,25 +119,29 @@ Copyright (c) 2025 University of Kent
 
 Please cite the code and work in this repository as follows:
 
-> Baruwa, Zsofia, & Li, Shujun & Zhu, Zhen & Yuan, Haiyue. (2025). ... https://doi.org/ ...
+> Baruwa, Zsofia, & Yuan, Haiyue & Li, Shujun & Zhu, Zhen. 2025. "Constructing and Analysing Global Corporate Networks
+With Wikidata: The Case of Electric Vehicle Industry". *Global Networks*. https://doi.org/10.1111/glob.70029
 
 
 ### Bibtex citation
 
 ```bibtex
-@software{baruwa_zsofia_2025,
+@article{baruwa_constructing_2025,
   author       = {Baruwa, Zsofia and
+                  Yuan, Haiyue and
                   Li, Shujun and
-                  Zhu, Zhen and
-                  Yuan, Haiyue},
-  title        = {{NetVizCorpy: Visualising corporate group(s)'
-                  networks from the publicly available WikiData}},
-  month        = jul,
-  year         = 2025,
-  publisher    = {...},
-  version      = {v0.1.0},
-  doi          = {...},
-  url          = {...}
+                  Zhu, Zhen},
+  title        = {{Constructing and Analysing Global Corporate Networks
+                  With Wikidata: The Case of Electric Vehicle Industry}},
+  abstract     = {Constructing comprehensive datasets for corporate network analysis remains a significant challenge for the business research community. This study introduces a novel Python tool, NetVizCorpy, which leverages Wikidata to generate such a dataset. We demonstrate its applications by constructing and analysing a global corporate network based on 44 seed electric vehicle (EV) companies and their three-level ownership structures. This dataset includes 1354 unique companies and 1575 ownership relations spanning 58 countries. We provide network characteristics, metrics and statistical insights, along with three detailed analytical applications. First, betweenness centrality identifies key influential companies, highlighting the role of financial institutions in industry resilience. Second, community detection reveals strategic positioning by EV manufacturers within global markets. Third, we find a nonlinear inverse U-shaped relationship between Global Network Connectivity (GNC) and Gross Competitive Intensity (GCI) at the country level. These findings offer new directions for understanding the resilience and competitiveness of the global EV industry},
+  journal      = {Global Networks},
+  volume       = {25},
+  issue        = {4},
+  month        = aug,
+  year         = {2025},
+  publisher    = {John Wiley & Sons Ltd},
+  doi          = {10.1111/glob.70029},
+  url          = {https://doi.org/10.1111/glob.70029}
 }
 ```
 
