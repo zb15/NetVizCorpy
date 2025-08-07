@@ -109,9 +109,7 @@ cleanedNetwork will return as a dataframe that could be exported as an .csv file
 The materials and methods in this repository support researchers and industry professionals to explore the sometimes over complicated corporate group structures in a user friendly interface as perceived by the public. 
 
 Zsofia Baruwa
-
 MIT Licence
-
 Copyright (c) 2025 University of Kent
 
 
