@@ -12,7 +12,6 @@ setup(
         "pyvis",
         "seaborn",
         "matplotlib",
-        "colorsys",
         "collections",
 
         # any other dependencies
